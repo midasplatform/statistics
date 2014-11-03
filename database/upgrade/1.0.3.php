@@ -18,12 +18,13 @@
  limitations under the License.
 =========================================================================*/
 
-/** Upgrade the statistics module to version 1.0.2. */
-class Statistics_Upgrade_1_0_2 extends MIDASUpgrade
+/** Upgrade the statistics module to version 1.0.3. */
+class Statistics_Upgrade_1_0_3 extends MIDASUpgrade
 {
-    /** Upgrade a MySQL database. */
-    public function mysql()
+    /** Upgrade a PostgreSQL database. */
+    public function pgsql()
     {
-        $this->db->query("ALTER TABLE `statistics_download` ADD COLUMN `user_agent` varchar(255);");
+        $this->db->query("ALTER TABLE statistics_ip_location ADD UNIQUE (ip);");
+        $this->db->query("CREATE INDEX statistics_ip_location_idx_ip ON statistics_ip_location (ip);");
     }
 }
